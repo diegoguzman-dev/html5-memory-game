@@ -1,0 +1,144 @@
+
+@import "compass";
+@import "animation";
+@import "susy";
+@import "normalize";
+$text-color: #222;
+@import "boilertop";
+
+$total-columns  : 4;             // a 12-column grid
+$column-width   : 12em;            // each column is 4em wide
+$gutter-width   : 1em;            // 1em gutters between columns
+$grid-padding   : $gutter-width;  // grid-padding equal to gutters
+
+$flip-duration: 0.5s;
+$shown-bg : #69A8E7;
+$folded-bg : #5B5E51;
+
+@include border-box-sizing;
+.page{
+	@include container;
+	// @include susy-grid-background;
+	.card1-1, 
+	.card1-2, 
+	.card2-1, 
+	.card2-2, 
+	.card3-1, 
+	.card3-2, 
+	.card1-3, 
+	.card2-3, 
+	.card3-3{
+		@include span-columns(1,$total-columns);
+		background: #58D3C7;
+	}
+	
+	.card1-4,
+	.card2-4, 
+	.card3-4{
+		@include span-columns(1 omega, $total-columns);
+		background: #D566CC;
+	}
+}
+.card{
+
+	border: solid thin #222;
+	@include border-radius(10px);
+	@include box-shadow(inset 0 0 0px 7px #FFF);
+
+	height: $column-width;
+	margin-top: $column-width/2;
+	
+}
+.card-content{
+	font-size: $column-width/2;
+	line-height: 0;
+	text-align: center;
+	@include translateY();
+}
+.card.folded{
+	background: $folded-bg;
+
+	.card-content{
+		visibility: hidden;
+	}
+}
+.folded.shown{
+	background: $shown-bg;
+	.card-content{
+		visibility: visible;
+	}
+}
+.card.offgame{
+	visibility: hidden;
+	.card-content{
+		visibility: hidden;
+	}
+}
+
+@include keyframes(show) {
+  0% {
+    background-color: $folded-bg;
+    
+    @include rotateY(180deg);
+  }
+  30%{
+  	background-color: $folded-bg;
+  }
+  30.01%{
+  	background-color: $shown-bg;
+  }
+  
+  100% {
+    background-color: $shown-bg;
+    
+	@include rotateY(360deg);
+  }
+}
+
+@include keyframes(hide){
+	0% {
+		background-color: $shown-bg;
+
+		@include rotateY(180deg);
+	}
+	30%{
+		background-color: $shown-bg;
+	}
+	30.01%{
+		background-color: $folded-bg;
+	}
+
+	100% {
+		background-color: $folded-bg;
+
+		@include rotateY(360deg);
+	}
+}
+
+@include keyframes(content-show){
+	0%{
+
+		opacity: 0;
+	}
+	30%{
+		opacity: 0;
+	}
+	30.01%{
+		opacity: 1;
+	}
+	100%{
+		
+		opacity: 1;
+	}
+}
+.shown{
+	
+	@include animation(show $flip-duration 1);
+	.card-content{
+		@include animation(content-show $flip-duration 1); 
+	}
+}
+.hiding{
+	@include animation(hide $flip-duration 1);
+}
+@import "boilerbottom";

@@ -1,0 +1,78 @@
+
+@import "susy";
+@import "boilertop";
+
+// $total-columns: 12;
+// $column-width: 4em;
+// $gutter-width: 1em;
+// $grid-padding: $gutter-width;
+
+// .page{
+// 	background: red;
+// 	@include container;
+// 	header, footer{clear: both; background: blue; color:white;}
+// 	nav{@include span-columns(3,12); background: green;}
+
+
+// 	.content{
+// 		background: lightblue;
+// 	@include span-columns(9 omega,12);
+// 	.test{@include span-columns(3,9)}
+// 	.main{@include span-columns(3,9); background: gold;}
+// 	.secondary{@include span-columns(3 omega, 9); background: black; color: white;}
+// 	}
+// }
+
+// p{
+// 	color:blue;
+// }
+// $total-columns: 4;
+// $column-width: 7em;
+// .page{
+// 	@include container;
+// 	.one{@include span-columns(1,4); background: #F361F8}
+// 	.two{@include span-columns(1,4); background: #00D96C}
+// 	.three{@include span-columns(1,4); background: #EF985F}
+// 	.four{@include span-columns(1 omega,4);background: #60D0E8}
+// 	@include at-breakpoint(80em 8){
+// 		@include container;
+// 		.one{@include span-columns(4,8)}
+// 		.two{@include span-columns(4 omega,8)}
+// 		.three{@include span-columns(5,8)}
+// 		.four{@include span-columns(3 omega,8)}
+// 	}
+// }
+
+$total-columns:10;
+$column-width:10em;
+$gutter-width: 0em;
+$grid-padding: $gutter-width;
+.page{
+	@include susy-grid-background;
+	@include container;
+	.ag1{
+		@include span-columns(2,10);
+		background: lightblue;
+	}
+	.ag2{
+		@include span-columns(6,10);
+		@include susy-grid-background
+	}
+	.ag9{@include span-columns(2 omega,10);background: lightblue;}
+	
+	.ag3{@include span-columns(3,6); background: red;}
+	.ag4{@include span-columns(3,6); background: red;}
+	.ag10{
+		@include span-columns(6,6);
+		.ag7{@include span-columns(1,3);background: orange;}
+		.ag5{@include span-columns(1,3);background: red;}
+		.ag6{@include span-columns(1 omega,3); background: red;}
+		.ag8{@include span-columns(2 omega,3);background: pink;}
+	}
+		
+	
+	
+
+}
+
+@import "boilerbottom";
