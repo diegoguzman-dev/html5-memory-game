@@ -28,7 +28,29 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function clearCards(card){
+        // card.addEventListener("animationend", function(){
+        //     this.classList.remove('shown', 'hiding');
         
+        //     card = null;
+        
+        // });
+        // card.addEventListener("webkitAnimationEnd", function(){
+        //     this.classList.remove('shown', 'hiding');
+        
+        //     card = null;
+        
+        // });
+
+        // secondCard.addEventListener("animationend", function(){
+        //     this.classList.remove('shown', 'hiding');
+            
+        //     secondCard = null;
+        // });
+        // secondCard.addEventListener("webkitAnimationEnd", function(){
+        //     this.classList.remove('shown', 'hiding');
+            
+        //     secondCard = null;
+        // });
         firstCard.classList.remove('shown', 'hiding');
         secondCard.classList.remove('shown', 'hiding');
         firstCard = null;
@@ -65,8 +87,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 firstCard.classList.add('hiding');
                 secondCard.classList.add('hiding');
 
-                
-                clearCards();
+                clearCards(firstCard);
+                clearCards(secondCard);
 
             }
         }else{
@@ -75,8 +97,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 firstCard.classList.add('hiding');
                 secondCard.classList.add('hiding');
 
-                
-                clearCards();
+                clearCards(firstCard);
+                clearCards(secondCard);
             }
         }
         console.log(firstCard);
