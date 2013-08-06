@@ -70,84 +70,19 @@ $match-color:#63D187;
 	}
 }
 .card.offgame{
+	
+	@include animation(remove-card $flip-duration 1);
+	.card-content{
+		@include animation(remove-content $flip-duration 1);
+	}
+}
+.offgame.gone{
 	visibility: hidden;
 	.card-content{
 		visibility: hidden;
 	}
 }
 
-@include keyframes(show) {
-  0% {
-    background-color: $folded-bg;
-    
-    @include rotateY(180deg);
-  }
-  30%{
-  	background-color: $folded-bg;
-  }
-  30.01%{
-  	background-color: $shown-bg;
-  }
-  
-  100% {
-    background-color: $shown-bg;
-    
-	@include rotateY(360deg);
-  }
-}
-
-@include keyframes(hide){
-	0% {
-		background-color: $shown-bg;
-
-		@include rotateY(180deg);
-	}
-	30%{
-		background-color: $shown-bg;
-	}
-	30.01%{
-		background-color: $folded-bg;
-	}
-
-	100% {
-		background-color: $folded-bg;
-
-		@include rotateY(360deg);
-	}
-}
-
-@include keyframes(content-show){
-	0%{
-
-		opacity: 0;
-	}
-	30%{
-		opacity: 0;
-	}
-	30.01%{
-		opacity: 1;
-	}
-	100%{
-		
-		opacity: 1;
-	}
-}
-@include keyframes(content-hide){
-	0%{
-		@include transform (rotateY(180deg) translateY(1em));
-		opacity: 1;
-	}
-	30%{
-		opacity: 1;
-	}
-	30.01%{
-		opacity: 0;
-	}
-	100%{
-		@include transform (rotateY(360) translateY(1em));
-		opacity: 0;
-	}
-}
 .shown{
 	
 	@include animation(show $flip-duration 1);
@@ -168,5 +103,6 @@ $match-color:#63D187;
 		visibility: hidden;
 	}
 }
+@import "cards-keyframes";
 @import "prompt";
 @import "boilerbottom";

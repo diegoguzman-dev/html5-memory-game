@@ -1,0 +1,80 @@
+@include keyframes(show) {
+  0% {
+    background-color: $folded-bg;
+    
+    @include rotateY(180deg);
+  }
+  30%{
+  	background-color: $folded-bg;
+  }
+  30.01%{
+  	background-color: $shown-bg;
+  }
+  
+  100% {
+    background-color: $shown-bg;
+    
+	@include rotateY(360deg);
+  }
+}
+
+@include keyframes(hide){
+	0% {
+		background-color: $shown-bg;
+
+		@include rotateY(180deg);
+	}
+	30%{
+		background-color: $shown-bg;
+	}
+	30.01%{
+		background-color: $folded-bg;
+	}
+
+	100% {
+		background-color: $folded-bg;
+
+		@include rotateY(360deg);
+	}
+}
+
+@include keyframes(content-show){
+	0%{
+
+		opacity: 0;
+	}
+	30%{
+		opacity: 0;
+	}
+	30.01%{
+		opacity: 1;
+	}
+	100%{
+		
+		opacity: 1;
+	}
+}
+@include keyframes(content-hide){
+	0%{
+		@include transform (rotateY(180deg) translateY(1em));
+		opacity: 1;
+	}
+	30%{
+		opacity: 1;
+	}
+	30.01%{
+		opacity: 0;
+	}
+	100%{
+		@include transform (rotateY(360) translateY(1em));
+		opacity: 0;
+	}
+}
+@include keyframes(remove-card){
+	0%{	@include transform (scale(1));}
+	100%{@include transform (scale(0.01));}
+}
+@include keyframes(remove-content){
+	0%{	@include transform (scale(1) translateY(1em));}
+	100%{@include transform (scale(0.01) translateY(1em));}
+}

@@ -61,19 +61,25 @@ document.addEventListener('DOMContentLoaded', function() {
     function clearCards(){
         
         firstCard.addEventListener("webkitAnimationStart", function(){
-            firstCard.classList.add('patch');
-            
+            this.classList.add('patch');
         }, false);
 
         secondCard.addEventListener("webkitAnimationStart", function(){
-            secondCard.classList.add('patch');
-        
+            this.classList.add('patch');
         }, false);
         
     }
 
     function matchFound(){
         matchFoundPrompt.classList.add('prompt-show');
+
+        firstCard.addEventListener("webkitAnimationEnd", function(){
+            this.classList.add('gone');
+        }, false);
+
+        secondCard.addEventListener("webkitAnimationEnd", function(){
+            this.classList.add('gone');
+        }, false);
     }
 
     shuffleArray(nbArray)
