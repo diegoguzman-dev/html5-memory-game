@@ -1,5 +1,36 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+    var matchFoundPrompt = document.getElementsByClassName('match-found');
+    matchFoundPrompt = matchFoundPrompt[0];
+
+    document.addEventListener("webkitAnimationEnd", function(event){
+            if(event.animationName === "content-hide"){
+                
+                
+                if(firstCard && secondCard){
+                    firstCard.classList.remove('shown', 'hiding','patch');
+                    secondCard.classList.remove('shown', 'hiding','patch');
+                    
+                    firstCard = null;
+                    secondCard = null;
+                }
+                
+            }
+        })
+
+    document.addEventListener("webkitAnimationStart", function(event){
+            if(event.animationName === "content-hide"){
+                
+                
+                if(firstCard && secondCard){
+                    firstCard.classList.add('shown', 'hiding', 'patch');
+                    secondCard.classList.add('shown', 'hiding', 'patch');
+                    
+                }
+                
+            }
+        })
+
     var cards = document.getElementsByClassName('card');
     var cardsContent = document.getElementsByClassName('card-content');
     var nbCards = cards.length;
@@ -27,34 +58,22 @@ document.addEventListener('DOMContentLoaded', function() {
         };  
     }
 
-    function clearCards(card){
-        // card.addEventListener("animationend", function(){
-        //     this.classList.remove('shown', 'hiding');
+    function clearCards(){
         
-        //     card = null;
-        
-        // });
-        // card.addEventListener("webkitAnimationEnd", function(){
-        //     this.classList.remove('shown', 'hiding');
-        
-        //     card = null;
-        
-        // });
+        firstCard.addEventListener("webkitAnimationStart", function(){
+            firstCard.classList.add('patch');
+            
+        }, false);
 
-        // secondCard.addEventListener("animationend", function(){
-        //     this.classList.remove('shown', 'hiding');
-            
-        //     secondCard = null;
-        // });
-        // secondCard.addEventListener("webkitAnimationEnd", function(){
-        //     this.classList.remove('shown', 'hiding');
-            
-        //     secondCard = null;
-        // });
-        firstCard.classList.remove('shown', 'hiding');
-        secondCard.classList.remove('shown', 'hiding');
-        firstCard = null;
-        secondCard = null;
+        secondCard.addEventListener("webkitAnimationStart", function(){
+            secondCard.classList.add('patch');
+        
+        }, false);
+        
+    }
+
+    function matchFound(){
+        matchFoundPrompt.classList.add('prompt-show');
     }
 
     shuffleArray(nbArray)
@@ -72,12 +91,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 secondCard = el;
                 secondCard.classList.add('shown');
                 if(firstCard.firstChild.innerHTML === secondCard.firstChild.innerHTML){
-                    alert('yey!');
+                    // alert('yey!');
+                    matchFound();
 
                     firstCard.classList.add('offgame');
                     secondCard.classList.add('offgame');
 
-                    clearCards();
+                    // clearCards();
                     if( offgameCards.length === cards.length){
                         alert('Thanks for playing');
                     }
@@ -87,8 +107,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 firstCard.classList.add('hiding');
                 secondCard.classList.add('hiding');
 
-                clearCards(firstCard);
-                clearCards(secondCard);
+                // clearCards();
+                
 
             }
         }else{
@@ -97,13 +117,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 firstCard.classList.add('hiding');
                 secondCard.classList.add('hiding');
 
-                clearCards(firstCard);
-                clearCards(secondCard);
+                // clearCards();
+            
             }
         }
-        console.log(firstCard);
-        console.log(secondCard);
+        // console.log(firstCard);
+        // console.log(secondCard);
     };
     
-    console.log(cards);
+    // console.log(cards);
+    console.log(matchFoundPrompt);
 }, false);

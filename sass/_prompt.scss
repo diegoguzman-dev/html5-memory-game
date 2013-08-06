@@ -1,0 +1,30 @@
+// .prompt{
+// 	display: none;
+// 	height: 100%;
+// 	position: fixed;
+// 	top: 0;
+// 	width: 100%;
+		
+// }
+// .prompt-text{
+// 	background: $match-color;
+// 	font-size: 5em;
+// 	left: 50%;
+// 	padding: 1em;
+// 	position: absolute;
+// 	top:50%;
+// 	@include transform(translate(-50%, -50%));
+// }
+.prompt{
+	position: fixed;
+	top:0;
+}
+.prompt-text{
+	background: $match-color;
+	height: 5em;
+	display:none;
+	width: 10em;
+}
+.prompt-text.prompt-show{
+	display: block;
+}

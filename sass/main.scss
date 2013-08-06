@@ -14,6 +14,7 @@ $grid-padding   : $gutter-width;  // grid-padding equal to gutters
 $flip-duration: 0.5s;
 $shown-bg : #69A8E7;
 $folded-bg : #5B5E51;
+$match-color:#63D187;
 
 @include border-box-sizing;
 .page{
@@ -131,6 +132,22 @@ $folded-bg : #5B5E51;
 		opacity: 1;
 	}
 }
+@include keyframes(content-hide){
+	0%{
+		@include transform (rotateY(180deg) translateY(1em));
+		opacity: 1;
+	}
+	30%{
+		opacity: 1;
+	}
+	30.01%{
+		opacity: 0;
+	}
+	100%{
+		@include transform (rotateY(360) translateY(1em));
+		opacity: 0;
+	}
+}
 .shown{
 	
 	@include animation(show $flip-duration 1);
@@ -140,5 +157,16 @@ $folded-bg : #5B5E51;
 }
 .hiding{
 	@include animation(hide $flip-duration 1);
+	.card-content{
+		@include animation(content-hide $flip-duration 1); 
+	}
 }
+.card.patch{
+	// margin-left: 2em;
+	background: $folded-bg;
+	.card-content{
+		visibility: hidden;
+	}
+}
+@import "prompt";
 @import "boilerbottom";
