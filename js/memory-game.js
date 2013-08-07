@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     matchFoundPrompt = matchFoundPrompt[0];
 
     document.addEventListener("webkitAnimationEnd", function(event){
-            if(event.animationName === "content-hide"){
+            animation = event.animationName;
+            if(animation === "content-hide"){
                 
                 
                 if(firstCard && secondCard){
@@ -15,21 +16,26 @@ document.addEventListener('DOMContentLoaded', function() {
                     secondCard = null;
                 }
                 
+            }else if(animation === "message-1"){
+                matchFoundPrompt.classList.remove('prompt-show');
             }
-        })
+        });
 
-    document.addEventListener("webkitAnimationStart", function(event){
-            if(event.animationName === "content-hide"){
+    // document.addEventListener("webkitAnimationStart", function(event){
+    //         if(event.animationName === "content-hide"){
                 
                 
-                if(firstCard && secondCard){
-                    firstCard.classList.add('shown', 'hiding', 'patch');
-                    secondCard.classList.add('shown', 'hiding', 'patch');
+    //             if(firstCard && secondCard){
+    //                 firstCard.classList.add('shown', 'hiding', 'patch');
+    //                 secondCard.classList.add('shown', 'hiding', 'patch');
                     
-                }
+    //             }
                 
-            }
-        })
+    //         }
+    //     });
+    
+
+
 
     var cards = document.getElementsByClassName('card');
     var cardsContent = document.getElementsByClassName('card-content');

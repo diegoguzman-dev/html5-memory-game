@@ -20,7 +20,6 @@
 	top:0;
 }
 .prompt-text{
-	background: $match-color;
 	height: 5em;
 	display:none;
 	width: 10em;
@@ -28,7 +27,14 @@
 
 .prompt-text.prompt-show{
 	display: block;
-	@include animation(message-1 5s 1);
+	@include animation(message-1 3s 1);
+}
+.match-found{
+	background: $match-color;
+}
+.game-over{
+	background: $match-color;
+	background: #3E8AAE;
 }
 @include keyframes(message-1){
 	0%{
@@ -38,7 +44,7 @@
 	30%{
 		@include transform (translateY(0));
 	}
-	80%{
+	75%{
 		@include transform (translateY(0));
 	}
 	100%{
