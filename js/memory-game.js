@@ -58,16 +58,20 @@ document.addEventListener('DOMContentLoaded', function() {
         };  
     }
 
-    function clearCards(){
+    // function clearCards(){
         
-        firstCard.addEventListener("webkitAnimationStart", function(){
-            this.classList.add('patch');
-        }, false);
+    //     firstCard.addEventListener("webkitAnimationStart", function(){
+    //         this.classList.add('patch');
+    //     }, false);
 
-        secondCard.addEventListener("webkitAnimationStart", function(){
-            this.classList.add('patch');
-        }, false);
+    //     secondCard.addEventListener("webkitAnimationStart", function(){
+    //         this.classList.add('patch');
+    //     }, false);
         
+    // }
+    function resumeGame(){
+        firstCard = null;
+        secondCard = null;
     }
 
     function matchFound(){
@@ -103,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     firstCard.classList.add('offgame');
                     secondCard.classList.add('offgame');
 
-                    // clearCards();
+                    resumeGame();
                     if( offgameCards.length === cards.length){
                         alert('Thanks for playing');
                     }
