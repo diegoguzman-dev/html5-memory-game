@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    var matchFoundPrompt = document.getElementsByClassName('match-found');
-    matchFoundPrompt = matchFoundPrompt[0];
+    var promptMessage;
 
     document.addEventListener("webkitAnimationEnd", function(event){
             animation = event.animationName;
@@ -17,25 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 
             }else if(animation === "message-1"){
-                matchFoundPrompt.classList.remove('prompt-show');
+                promptMessage.classList.remove('prompt-show');
             }
         });
-
-    // document.addEventListener("webkitAnimationStart", function(event){
-    //         if(event.animationName === "content-hide"){
-                
-                
-    //             if(firstCard && secondCard){
-    //                 firstCard.classList.add('shown', 'hiding', 'patch');
-    //                 secondCard.classList.add('shown', 'hiding', 'patch');
-                    
-    //             }
-                
-    //         }
-    //     });
-    
-
-
 
     var cards = document.getElementsByClassName('card');
     var cardsContent = document.getElementsByClassName('card-content');
@@ -64,24 +47,15 @@ document.addEventListener('DOMContentLoaded', function() {
         };  
     }
 
-    // function clearCards(){
-        
-    //     firstCard.addEventListener("webkitAnimationStart", function(){
-    //         this.classList.add('patch');
-    //     }, false);
-
-    //     secondCard.addEventListener("webkitAnimationStart", function(){
-    //         this.classList.add('patch');
-    //     }, false);
-        
-    // }
     function resumeGame(){
         firstCard = null;
         secondCard = null;
     }
 
-    function matchFound(){
-        matchFoundPrompt.classList.add('prompt-show');
+    function showMessage(prompt, gameOver){
+        promptMessage = document.getElementsByClassName(prompt);
+        promptMessage = promptMessage[0];
+        promptMessage.classList.add('prompt-show');
 
         firstCard.addEventListener("webkitAnimationEnd", function(){
             this.classList.add('gone');
@@ -90,6 +64,11 @@ document.addEventListener('DOMContentLoaded', function() {
         secondCard.addEventListener("webkitAnimationEnd", function(){
             this.classList.add('gone');
         }, false);
+        if(gameOver){
+            promptMessage = document.getElementsByClassName(gameOver);
+            promptMessage = promptMessage[0];
+            promptMessage.classList.remove('prompt-show');
+        }
     }
 
     shuffleArray(nbArray)
@@ -108,14 +87,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 secondCard.classList.add('shown');
                 if(firstCard.firstChild.innerHTML === secondCard.firstChild.innerHTML){
                     // alert('yey!');
-                    matchFound();
+                    showMessage('match-found');
 
                     firstCard.classList.add('offgame');
                     secondCard.classList.add('offgame');
 
                     resumeGame();
                     if( offgameCards.length === cards.length){
-                        alert('Thanks for playing');
+                        // alert('Thanks for playing');
+                        showMessage('game-over', 'match-found');
                     }
                 }
             }else{
@@ -142,5 +122,5 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     
     // console.log(cards);
-    console.log(matchFoundPrompt);
+    console.log(promptMessage);
 }, false);
