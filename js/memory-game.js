@@ -20,6 +20,19 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+    document.addEventListener("webkitAnimationStart", function(event){
+            if(event.animationName === "content-hide"){
+                
+                
+                if(firstCard && secondCard){
+                    firstCard.classList.add('shown', 'hiding', 'patch');
+                    secondCard.classList.add('shown', 'hiding', 'patch');
+                    
+                }
+                
+            }
+        })
+
     var cards = document.getElementsByClassName('card');
     var cardsContent = document.getElementsByClassName('card-content');
     var nbCards = cards.length;
