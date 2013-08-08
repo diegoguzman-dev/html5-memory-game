@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     var promptMessage;
+    var gameOver
 
     document.addEventListener("webkitAnimationEnd", function(event){
             animation = event.animationName;
@@ -17,6 +18,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 
             }else if(animation === "message-1"){
                 promptMessage.classList.remove('prompt-show');
+                if(gameOver){
+                    gameOver.addEventListener("webkitAnimationEnd", function(event){
+                        this.classList.remove('prompt-show');
+                    });
+                }
             }
         });
 
@@ -65,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         secondCard = null;
     }
 
-    function showMessage(prompt, gameOver){
+    function showMessage(prompt){
         promptMessage = document.getElementsByClassName(prompt);
         promptMessage = promptMessage[0];
         promptMessage.classList.add('prompt-show');
@@ -77,11 +83,6 @@ document.addEventListener('DOMContentLoaded', function() {
         secondCard.addEventListener("webkitAnimationEnd", function(){
             this.classList.add('gone');
         }, false);
-        if(gameOver){
-            promptMessage = document.getElementsByClassName(gameOver);
-            promptMessage = promptMessage[0];
-            promptMessage.classList.remove('prompt-show');
-        }
     }
 
     shuffleArray(nbArray)
@@ -108,7 +109,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     resumeGame();
                     if( offgameCards.length === cards.length){
                         // alert('Thanks for playing');
-                        showMessage('game-over', true);
+                        gameOver = document.getElementsByClassName('game-over');
+                        gameOver = gameOver[0];
+                        gameOver.classList.add('prompt-show');
                     }
                 }
             }else{
