@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     resumeGame();
                     if( offgameCards.length === cards.length){
                         // alert('Thanks for playing');
-                        showMessage('game-over', 'match-found');
+                        showMessage('game-over', true);
                     }
                 }
             }else{
