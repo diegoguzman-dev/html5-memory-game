@@ -40,12 +40,14 @@ $match-color:#63D187;
 		background: #D566CC;
 	}
 }
+.intro > .card{
+	@include animation(shuffle 3s 1);
+}
 .card{
 
 	border: solid thin #222;
 	@include border-radius(10px);
 	@include box-shadow(inset 0 0 0px 7px #FFF);
-
 	height: $column-width;
 	margin-top: $column-width/2;
 	
@@ -91,9 +93,9 @@ $match-color:#63D187;
 	}
 }
 .hiding{
-	@include animation(hide $flip-duration 1);
+	@include animation(hide $flip-duration*0.5 1);
 	.card-content{
-		@include animation(content-hide $flip-duration 1); 
+		@include animation(content-hide $flip-duration*0.5 1); 
 	}
 }
 .card.patch{
