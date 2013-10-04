@@ -3,6 +3,7 @@
 @import "animation";
 @import "susy";
 @import "normalize";
+@import "variables";
 $text-color: #222;
 @import "boilertop";
 
@@ -40,14 +41,15 @@ $match-color:#63D187;
 		background: #D566CC;
 	}
 }
-.intro > .card{
-	@include animation(shuffle 3s 1);
+.intro{
+
+	// @include animation(shuffle 3s 1);
 }
 .card{
 
 	border: solid thin #222;
-	@include border-radius(10px);
-	@include box-shadow(inset 0 0 0px 7px #FFF);
+	border-radius: 10px;
+	box-shadow: inset 0 0 0px 7px #FFF;
 	height: $column-width;
 	margin-top: $column-width/2;
 	
@@ -56,7 +58,7 @@ $match-color:#63D187;
 	font-size: $column-width/2;
 	line-height: 0;
 	text-align: center;
-	@include translateY();
+	transform: translateY(1em);
 }
 .card.folded{
 	background: $folded-bg;
@@ -73,9 +75,9 @@ $match-color:#63D187;
 }
 .card.offgame{
 	
-	@include animation(remove-card $flip-duration 1);
+	animation: remove-card $flip-duration 1;
 	.card-content{
-		@include animation(remove-content $flip-duration 1);
+		animation:remove-content $flip-duration 1;
 	}
 }
 .offgame.gone{
@@ -87,15 +89,15 @@ $match-color:#63D187;
 
 .shown{
 	
-	@include animation(show $flip-duration 1);
+	animation: show $flip-duration 1;
 	.card-content{
-		@include animation(content-show $flip-duration 1); 
+		animation: content-show $flip-duration 1; 
 	}
 }
 .hiding{
-	@include animation(hide $flip-duration*0.5 1);
+	animation: hide $flip-duration*0.5 1;
 	.card-content{
-		@include animation(content-hide $flip-duration*0.5 1); 
+		animation:content-hide $flip-duration*0.5 1; 
 	}
 }
 .card.patch{

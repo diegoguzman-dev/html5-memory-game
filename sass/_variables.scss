@@ -1,0 +1,10 @@
+@mixin shuffle($card, $row, $column){
+	.#{$card}{
+		animation: shuffle#{$row}-#{$column};
+	}
+
+	@keyframes shuffle#{$row}-#{$column}{
+		transform: translate(20em, 18em);
+	}
+
+}
