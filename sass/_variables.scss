@@ -1,10 +1,41 @@
-@mixin shuffle($card, $row, $column){
-	.#{$card}{
-		animation: shuffle#{$row}-#{$column};
+@mixin deal($card, $column, $row, $delay){
+	$tx: 0;
+	$ty: 0;
+
+	@if $column == 1{
+		$tx: 20em;
+	}
+	@if $column == 2{
+		$tx: 6em;
+	}
+	@if $column == 3{
+		$tx: -7em;
+	}
+	@if $column == 4{
+		$tx: -20em;
+	}
+	@if $row == 1{
+		$ty : 19em;
+	}
+	@if $row == 2{
+		$ty : 0;
+	}
+	@if $row == 3{
+		$ty: -18em;
 	}
 
-	@keyframes shuffle#{$row}-#{$column}{
-		transform: translate(20em, 18em);
+	.intro .#{$card}{
+		animation: deal#{$row}-#{$column} $delay;
+	}
+
+	@keyframes deal#{$row}-#{$column}{
+		from{
+			transform: translate($tx, $ty);	
+		}
+		to{
+			transform: translate(0, 0)
+		}
+		
 	}
 
 }

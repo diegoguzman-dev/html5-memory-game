@@ -1,5 +1,7 @@
 css/*
 js/min/*
+node_modules
+Gruntfile.js
 *.sublime-project
 *.sublime-workspace
 

@@ -11,27 +11,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    PrefixedEvent(document, "AnimationStart", animStart() );
-    PrefixedEvent(document, "AnimationIteration", animIter() );
-    PrefixedEvent(document, "AnimationEnd", animEnd() );
-
-    function animStart(){
-        // console.log('Animation Started')
-    }
-
-    function animIter(){
-        // console.log('Animation Iteration')
-    }
-
-    function animEnd(){
-        // console.log(this.event)
-    }
+   
 
     function hideEnd(){
         PrefixedEvent(document, "AnimationEnd", function(event){
             if(event.animationName === "hide"){
                 event.target.classList.remove('shown', 'hiding');
-                hideBuffer = false
+                hideBuffer = false;
+                firstCard = null;
+                secondCard = null;
+                console.log(hideBuffer);
             }
         } );
     }
@@ -42,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 event.target.classList.add('gone');
                 firstCard = null;
                 secondCard = null;
+
             }
         } );
     }
@@ -49,12 +39,16 @@ document.addEventListener('DOMContentLoaded', function() {
     //Public Game variables
     var cards = document.getElementsByClassName('card');
     var cardsContent = document.getElementsByClassName('card-content');
+    var gameOver = document.getElementById('game-over');
     var nbCards = cards.length;
     var nbArray = Array();
     var introPlaying = true;
+    var cardsOffGame = 0;
     var firstCard;
     var secondCard;
     var hideBuffer;
+
+
 
     // Suffling and adding content to cards
     for (var i = 1; i <= (nbCards+1)/2; i++) {
@@ -83,41 +77,49 @@ document.addEventListener('DOMContentLoaded', function() {
     //Let's decide what happens when the user starts clicking around
 
     document.addEventListener('click', function(event){
+        console.log('click: ' + hideBuffer)
         // If intro is playing, cancel it to start playing
-        if(introPlaying){
-            var intro = document.getElementsByClassName('intro');
-            intro[0].classList.remove('intro');
-            introPlaying = false;
-        }
-        var target = event.target;
+        if(!hideBuffer){
+            if(introPlaying){
+                var intro = document.getElementsByClassName('intro');
+                intro[0].classList.remove('intro');
+                introPlaying = false;
+            }
+            var target = event.target;
 
-        // if two cards are already shown, hide them
-        if(firstCard && secondCard){
-            firstCard.classList.add('hiding');
-            secondCard.classList.add('hiding');
-            hideBuffer = true;
-            hideEnd();
-            firstCard = null;
-            secondCard = null;
-        }
-
-        if( target.classList.contains('card') && !hideBuffer){
-            if(!firstCard){
-                firstCard = target;
-                firstCard.classList.add('shown');
-            }else if(!secondCard && target !== firstCard){
-                secondCard = target;
-                secondCard.classList.add('shown');
-
-                if(firstCard.firstChild.innerHTML === secondCard.firstChild.innerHTML){
-                    console.log('yes');
-                    firstCard.classList.add('offgame');
-                    secondCard.classList.add('offgame');
-                    removePair();
-                }
+            // if two cards are already shown, hide them
+            if(firstCard && secondCard){
+                hideBuffer = true;
+                console.log(hideBuffer);
+                firstCard.classList.add('hiding');
+                secondCard.classList.add('hiding');          
+                hideEnd();             
             }
 
+            if( target.classList.contains('card') && !hideBuffer){
+                if(!firstCard){
+                    firstCard = target;
+                    firstCard.classList.add('shown');
+                }else if(!secondCard && target !== firstCard){
+                    secondCard = target;
+                    secondCard.classList.add('shown');
+
+                    if(firstCard.firstChild.innerHTML === secondCard.firstChild.innerHTML){
+                        firstCard.classList.add('offgame');
+                        secondCard.classList.add('offgame');
+                        cardsOffGame += 2;
+                        console.log(cardsOffGame);
+                        if(cardsOffGame === nbCards){
+                            // alert('Game Over');
+                            gameOver.classList.add('prompt-show');
+                        }
+                        removePair();
+                    }
+                }
+
+            }
         }
+            
 
     });
 }, false);

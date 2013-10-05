@@ -27,27 +27,37 @@
 
 .prompt-text.prompt-show{
 	display: block;
-	@include animation(message-1 3s 1);
+	animation: message-1 3s 1;
 }
 .match-found{
 	background: $match-color;
 }
-.game-over{
+#game-over.prompt-show{
 	background: $match-color;
 	background: #3E8AAE;
+	animation: message-2 2s;
 }
-@include keyframes(message-1){
+@keyframes message-1 {
 	0%{
-		@include transform (translateY(-10em));
+		transform: translateY(-10em);
 		
 	}
 	30%{
-		@include transform (translateY(0));
+		transform: translateY(0);
 	}
 	75%{
-		@include transform (translateY(0));
+		transform: translateY(0);
 	}
 	100%{
-		@include transform (translateY(-10em));
+		transform: translateY(-10em);
+	}
+}
+@keyframes message-2 {
+	from{
+		transform: translateY(-10em);
+		
+	}
+	to{
+		transform: translateY(0);
 	}
 }

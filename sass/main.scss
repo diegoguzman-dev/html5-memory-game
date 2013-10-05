@@ -41,9 +41,12 @@ $match-color:#63D187;
 		background: #D566CC;
 	}
 }
-.intro{
 
-	// @include animation(shuffle 3s 1);
+@for $i from 1 through 3{
+	@for $j from 1 through 4{
+		$new-delay: ($i + $j) * 0.2s;
+		@include deal(card#{$i}-#{$j}, $j, $i, $new-delay)
+	}
 }
 .card{
 
